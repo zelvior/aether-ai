@@ -26,8 +26,8 @@ never described in the present tense. If you find a document that violates this,
 
 | # | Phase | State | Depends on |
 | --- | --- | --- | --- |
-| 1 | Repository foundation | **In progress** | — |
-| 2 | Research and architecture specification | Planned | 1 |
+| 1 | Repository foundation | **Completed** | — |
+| 2 | Research and architecture specification | **In progress** | 1 |
 | 3 | Tokenizer development | Planned | 2 |
 | 4 | Minimal neural network prototype | Planned | 2, 3 |
 | 5 | Training pipeline | Planned | 4 |
@@ -40,7 +40,8 @@ never described in the present tense. If you find a document that violates this,
 
 ## Phase 1 — Repository foundation
 
-**State: In progress**
+**State: Completed** — except the open maintainer decisions below, which are not
+technical work.
 
 Establish the non-technical groundwork so that research starts on a clean base.
 
@@ -64,17 +65,89 @@ that blocks real use remains.
 
 ## Phase 2 — Research and architecture specification
 
-**State: Planned**
+**State: In progress** — all thirty-five documents (twenty-seven Phase 2, eight Phase 1) are written
+and under review. No experiment has been run.
 
-Write down the model design before implementing it.
+Write down the design before implementing it.
 
-- [ ] Survey of constrained-resource inference techniques, with citations
-- [ ] Architecture specification: layers, dimensions, parameter budget, rationale
-- [ ] Memory budget: target footprint under a 32-bit address space, with headroom
-- [ ] Numeric strategy: data types, accumulation behaviour, overflow handling
-- [ ] Model format specification: container, versioning, integrity checks, safe parsing rules
-- [ ] Tokenizer design specification: vocabulary strategy and file format
-- [ ] Defined baseline for comparison, and what "better" will mean
+**Core research**
+
+- [x] Literature survey of constrained-resource inference techniques, with citations —
+      [`RESEARCH_SURVEY.md`](RESEARCH_SURVEY.md)
+- [x] Intelligence-density measurement framework —
+      [`INTELLIGENCE_DENSITY_RESEARCH.md`](INTELLIGENCE_DENSITY_RESEARCH.md)
+- [x] Architecture specification: layers, dimensions, parameter budget, rationale —
+      [`ARCHITECTURE_SPEC.md`](ARCHITECTURE_SPEC.md)
+- [x] Adaptive computation analysis and controller proposal —
+      [`ADAPTIVE_COMPUTATION.md`](ADAPTIVE_COMPUTATION.md)
+- [x] Mathematical foundations: forward/backward derivations, memory, BPC —
+      [`MATHEMATICAL_FOUNDATIONS.md`](MATHEMATICAL_FOUNDATIONS.md)
+- [x] Optimisation theory: μP and the learning-rate transfer question —
+      [`OPTIMISATION_THEORY.md`](OPTIMISATION_THEORY.md)
+- [x] Scaling-law analysis and its extrapolation limits —
+      [`SCALING_LAW_ANALYSIS.md`](SCALING_LAW_ANALYSIS.md)
+
+**Neural infrastructure**
+
+- [x] Training strategy: initialisation, objectives, data pipeline, reproducibility —
+      [`TRAINING_STRATEGY.md`](TRAINING_STRATEGY.md)
+- [x] Tokenizer design specification: vocabulary strategy and file format —
+      [`TOKENIZER_SPEC.md`](TOKENIZER_SPEC.md)
+- [x] Multilingual research: per-script costs, merge allocation, Roman Urdu —
+      [`MULTILINGUAL_RESEARCH.md`](MULTILINGUAL_RESEARCH.md)
+- [x] Numeric strategy: data types, accumulation behaviour, overflow handling —
+      [`NUMERICAL_STRATEGY.md`](NUMERICAL_STRATEGY.md)
+- [x] Model format specification: container, versioning, integrity checks, safe parsing rules —
+      [`MODEL_FORMAT_SPEC.md`](MODEL_FORMAT_SPEC.md)
+
+**Ecosystem**
+
+- [x] Cognitive system: classification, planning, execution, verification —
+      [`COGNITIVE_SYSTEM_SPEC.md`](COGNITIVE_SYSTEM_SPEC.md)
+- [x] Memory system: storage, retrieval, consolidation, deletion —
+      [`MEMORY_SYSTEM_SPEC.md`](MEMORY_SYSTEM_SPEC.md)
+- [x] Tools system: registration, permissions, sandboxing, threat model —
+      [`TOOLS_SYSTEM_SPEC.md`](TOOLS_SYSTEM_SPEC.md)
+- [x] Knowledge and retrieval system —
+      [`KNOWLEDGE_SYSTEM_SPEC.md`](KNOWLEDGE_SYSTEM_SPEC.md)
+- [x] Runtime: loading, execution, kernels, determinism —
+      [`RUNTIME_SPEC.md`](RUNTIME_SPEC.md)
+- [x] Ecosystem rationale: why six components rather than one model —
+      [`ECOSYSTEM_ARCHITECTURE.md`](ECOSYSTEM_ARCHITECTURE.md)
+
+**Hardware and resources**
+
+- [x] Memory budget: target footprint under a 32-bit address space, with headroom —
+      [`MEMORY_BUDGET.md`](MEMORY_BUDGET.md)
+- [x] Native 32-bit x86 research —
+      [`CPU_32BIT_RESEARCH.md`](CPU_32BIT_RESEARCH.md)
+- [x] Platform compatibility plan: how compatibility claims are earned —
+      [`PLATFORM_COMPATIBILITY_PLAN.md`](PLATFORM_COMPATIBILITY_PLAN.md)
+
+**Scientific evaluation**
+
+- [x] Defined baseline for comparison, and what "better" will mean —
+      [`EVALUATION_PLAN.md`](EVALUATION_PLAN.md)
+- [x] Experimental methodology: admissibility, manifests, ablations, statistics —
+      [`EXPERIMENTAL_METHODOLOGY.md`](EXPERIMENTAL_METHODOLOGY.md)
+- [x] Costed experimental programme: the 5-day regime test —
+      [`EXPERIMENT_PLAN.md`](EXPERIMENT_PLAN.md)
+- [x] Annotated reference registry —
+      [`RESEARCH_REFERENCES.md`](RESEARCH_REFERENCES.md)
+- [x] Training compute feasibility — [`TRAINING_FEASIBILITY.md`](TRAINING_FEASIBILITY.md)
+- [x] Phase 2 synthesis: findings, errors, and what remains open —
+      [`PHASE2_FINDINGS.md`](PHASE2_FINDINGS.md)
+- [ ] Specifications reviewed by the maintainer; unresolved questions triaged
+
+**Phase 2 outputs are proposals, not results.** The proposed architecture is an 8 425 728-parameter
+sliding-window Transformer (Config M), with a 1 840 256-parameter Config N as the first model to be
+trained and a 228 672-parameter Config T as a pipeline-validation fixture. All parameter and memory
+figures are derived analytically. **None is measured, nothing is implemented, no 32-bit compatibility
+claim is made, and no component of the six-component ecosystem exists in code.**
+
+The most important Phase 2 finding is a negative one: the surrounding ecosystem does **not** make the
+neural model more capable. See [`EVALUATION_PLAN.md`](EVALUATION_PLAN.md) §7, which forbids attributing
+ecosystem-level gains to the Core.
 
 **Exit criteria:** specifications are reviewable and contain no fabricated numbers. Any design
 assumption that has not been tested is marked as an assumption.
@@ -107,8 +180,12 @@ The smallest model that is genuinely trainable and understandable.
 - [ ] Minimal model implementation in portable code
 - [ ] Forward pass verified against a hand-checked reference
 - [ ] Parameter count and memory footprint measured
+- [ ] Config T (228,672 parameters) trained end to end as a pipeline test
 - [ ] Training on a small, documented corpus to demonstrate the pipeline works
 - [ ] Prototype limitations documented
+
+Config T is specified in [`TRAINING_FEASIBILITY.md`](TRAINING_FEASIBILITY.md) §6. It exists only to
+validate the pipeline and is **not a model release or a capability claim**.
 
 **Exit criteria:** a model can be trained and its outputs reproduced by another person.
 
@@ -117,6 +194,12 @@ The smallest model that is genuinely trainable and understandable.
 ## Phase 5 — Training pipeline
 
 **State: Planned**
+
+**Training runs on an x86-64 development machine, not on the 32-bit target.** The reasoning and the
+arithmetic are in [`TRAINING_FEASIBILITY.md`](TRAINING_FEASIBILITY.md): training Config M requires
+roughly 4.3 × 10¹⁵ floating-point operations, which is on the order of 49 days on a 1 GFLOP/s 32-bit
+core. 32-bit *training* is therefore an explicit non-goal. This does not weaken the 32-bit goal, which
+concerns **inference** (Phase 7).
 
 - [ ] Reproducible experiment configuration (seeds, data version, hyperparameters)
 - [ ] Checkpointing and resume
@@ -148,6 +231,10 @@ stated tolerance.
 ## Phase 7 — 32-bit x86 compatibility testing
 
 **State: Planned**
+
+This phase tests **inference only**. Training is out of scope by design
+([`TRAINING_FEASIBILITY.md`](TRAINING_FEASIBILITY.md) §5), so this phase is not blocked on training
+capacity — only on execution capacity.
 
 This phase cannot begin until a real 32-bit build and execution environment exists. Until then,
 **no 32-bit compatibility claim is made anywhere in this repository.**
