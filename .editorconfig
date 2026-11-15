@@ -1,0 +1,41 @@
+# EditorConfig — https://editorconfig.org
+#
+# These rules are intentionally conservative: they describe conventions the
+# project already follows in its documentation and are safe for any language
+# added later. Language-specific formatters may override them, but should be
+# configured in-repository rather than relying on local editor settings.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+# Markdown: trailing double spaces are meaningful (hard line break), and
+# long URLs / tables are often better left unwrapped.
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+[*.{c,h}]
+indent_size = 4
+
+[*.{cc,cpp,hpp,cxx}]
+indent_size = 4
+
+[*.{py,pyi}]
+indent_size = 4
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.{json,jsonc}]
+indent_size = 2
+
+[Makefile]
+indent_style = tab

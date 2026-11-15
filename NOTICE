@@ -1,0 +1,44 @@
+AETHER
+Copyright 2026 Zelvior
+
+This product includes software developed as part of the AETHER project
+(https://github.com/zelvior/aether-ai).
+
+The AETHER project is licensed under the Apache License, Version 2.0.
+See the LICENSE file for the full license text.
+
+--------------------------------------------------------------------------------
+THIRD-PARTY NOTICES
+--------------------------------------------------------------------------------
+
+This NOTICE file is intentionally minimal at this stage of the project. The
+AETHER repository does not currently distribute any third-party source code,
+model weights, datasets, or other third-party assets.
+
+When third-party material is incorporated into this repository or distributed
+with an AETHER release, the required attribution notices will be added here,
+including (where applicable):
+
+  * the name of the third-party component;
+  * the copyright holder named by that component;
+  * the license under which it is distributed;
+  * any required attribution or modification statements;
+  * a pointer to the full license text.
+
+Attribution requirements are described in docs/LICENSE_POLICY.md.
+
+--------------------------------------------------------------------------------
+SCOPE NOTE
+--------------------------------------------------------------------------------
+
+The Apache License 2.0 applies to this repository's original source code and
+documentation. It does not, by itself, grant rights to:
+
+  * model weights or checkpoints (none are currently distributed);
+  * training datasets (none are currently distributed);
+  * third-party assets included in future releases;
+  * the AETHER name or any project marks beyond reasonable and customary use in
+    describing the origin of the work, as set out in Section 6 of the License.
+
+No trademark, certification, patent grant beyond Section 3 of the License, or
+legal review is implied by this NOTICE.
