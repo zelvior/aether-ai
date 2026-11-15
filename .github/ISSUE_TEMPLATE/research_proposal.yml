@@ -1,0 +1,134 @@
+name: Research proposal
+description: Propose a research direction, experiment, architecture idea, or evaluation method.
+title: "[Research]: "
+labels: ["research", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to propose **research**, not to request a feature. A proposal should be
+        falsifiable: state the question, the hypothesis, and how the result would be measured.
+
+        Read first:
+        - [docs/RESEARCH_PRINCIPLES.md](https://github.com/zelvior/aether-ai/blob/main/docs/RESEARCH_PRINCIPLES.md)
+        - [docs/ROADMAP.md](https://github.com/zelvior/aether-ai/blob/main/docs/ROADMAP.md)
+
+        Proposals that cannot be evaluated, or that rest on unverified external numbers, will be
+        asked for more detail rather than rejected outright.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I have read the research principles and the roadmap.
+          required: true
+        - label: "This proposal is within scope: CPU-first, from-scratch, no mandatory pretrained weights."
+          required: true
+        - label: I have searched existing issues and research proposals.
+          required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+      description: State the question in one or two sentences. It should be answerable by experiment.
+      placeholder: "Under what conditions does X improve Y on constrained CPU targets?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: What do you predict, and what result would falsify it?
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: Proposed approach
+      description: |
+        How would you investigate this? Include the experiment design, the variables, and what
+        would be held constant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: measurement
+    attributes:
+      label: Measurement plan
+      description: |
+        What would be measured, with what tooling, on what hardware, and how many repetitions?
+        Include the baseline you would compare against.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Primary area
+      description: Which research area does this proposal primarily concern?
+      options:
+        - "Model architecture"
+        - "Tokenizer design"
+        - "Training procedure or objective"
+        - "Inference runtime and memory layout"
+        - "Quantization and numerics"
+        - "Evaluation methodology"
+        - "Data and preprocessing methodology"
+        - "Portability and platform behaviour"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: Prior work and references
+      description: |
+        Relevant published work or implementations. Cite sources with links. If you rely on a
+        reported number from elsewhere, say so and mark it as unverified here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Feasibility and constraints
+      description: |
+        What compute, data, and time would this need? Does it assume GPU access, large memory, or
+        a dataset the project does not have? How would it behave on 32-bit x86?
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and confounding factors
+      description: What could make the result misleading? Benchmarks that overfit, data leakage, measurement noise.
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Possible outcomes
+      description: What would you do differently depending on the result? Include the negative result.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: integrity
+    attributes:
+      label: Research integrity
+      options:
+        - label: I will report results regardless of outcome, including negative and inconclusive ones.
+          required: true
+        - label: I will not present an unverified number as a project result.
+          required: true
+        - label: I have not copied material from elsewhere without attribution and a compatible license.
+          required: true
+        - label: I agree to follow this project's Code of Conduct.
+          required: true

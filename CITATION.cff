@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "AETHER"
+type: software
+abstract: >-
+  An experimental, CPU-first AI model and inference ecosystem, designed from
+  scratch for efficient execution on legacy 32-bit x86 and modern systems.
+  AETHER is at an early research and foundation stage: no model, trained
+  weights, runtime, tokenizer, or benchmark results exist yet.
+authors:
+  # A CFF "entity" author (an organization rather than a person) permits only
+  # name, alias, website, location, address fields and the like. No ORCID, email,
+  # or given/family names are asserted, because none are verified for this project.
+  - name: "Zelvior"
+    website: "https://github.com/zelvior"
+    location: "Pakistan"
+repository-code: "https://github.com/zelvior/aether-ai"
+url: "https://github.com/zelvior/aether-ai"
+license: Apache-2.0
+keywords:
+  - "aether"
+  - "machine learning"
+  - "inference"
+  - "cpu inference"
+  - "x86"
+  - "32-bit"
+  - "research"
+# ---------------------------------------------------------------------------
+# MAINTAINER ACTION REQUIRED — the fields below are deliberately omitted
+# rather than guessed. Add each only once the value is real and verified.
+#
+#   version:          only when a tagged release exists
+#   date-released:    only for an actual release, format YYYY-MM-DD
+#   doi:              only after an archive (e.g. Zenodo) mints a DOI
+#   identifiers:      only with a real identifier and verified value
+#   contact:          only with a monitored, real contact address
+#   commit:           the exact commit being described, if citing a snapshot
+#
+# See docs/LICENSE_POLICY.md and the Citation File Format 1.2.0 schema:
+# https://github.com/citation-file-format/citation-file-format
+# ---------------------------------------------------------------------------

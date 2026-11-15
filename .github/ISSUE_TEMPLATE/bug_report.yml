@@ -1,0 +1,121 @@
+name: Bug report
+description: Report a reproducible defect in AETHER code, documentation, or tooling.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem.
+
+        **Before you continue:**
+        - Do not report security vulnerabilities here. See [SECURITY.md](https://github.com/zelvior/aether-ai/blob/main/SECURITY.md).
+        - AETHER is at an early foundation stage. Much of the planned system does not exist yet;
+          please check [docs/ROADMAP.md](https://github.com/zelvior/aether-ai/blob/main/docs/ROADMAP.md)
+          first if something appears to be "missing".
+        - Developer preview support is best-effort and carries no response-time commitment.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: This is not a security vulnerability (those are reported privately per SECURITY.md).
+          required: true
+        - label: I have read the relevant documentation for the component involved.
+          required: true
+
+  - type: input
+    id: affected-area
+    attributes:
+      label: Affected area
+      description: Which component, document, or workflow is affected?
+      placeholder: "e.g. docs/LICENSE_POLICY.md, repository checks workflow, AETHER Runtime (planned)"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: The release tag, branch, or commit hash you are testing. Write "no release exists" if that is the case.
+      placeholder: "e.g. commit a1b2c3d, branch main"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What did you expect to happen, and what led you to expect it?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What happened instead? Include the exact error output.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: |
+        The smallest sequence that reliably reproduces the problem.
+        For build issues, include the exact commands.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Operating system, CPU architecture (state 32-bit or 64-bit explicitly), toolchain and
+        version, build flags, and anything else relevant.
+      value: |
+        - OS:
+        - Architecture: (32-bit x86 / x86-64 / other)
+        - Toolchain and version:
+        - Build flags:
+    validations:
+      required: true
+
+  - type: dropdown
+    id: arch-attempt
+    attributes:
+      label: Did you attempt a 32-bit x86 build?
+      description: This helps distinguish actual 32-bit issues from 64-bit-only problems.
+      options:
+        - "Not applicable"
+        - "Yes, and it failed (details above)"
+        - "Yes, and it succeeded but behaviour differs"
+        - "No"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Logs, screenshots, related issues, or a proposed cause. Remove personal data first.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct.
+          required: true

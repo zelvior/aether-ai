@@ -1,0 +1,36 @@
+AETHER — Authors and Attribution
+================================
+
+This file records the people and organizations responsible for this project.
+It is deliberately short. Only contributors whose work is part of this
+repository, and who have agreed to be listed, belong here.
+
+Project owner / maintainer
+--------------------------
+
+  Zelvior (Zelvior Labs)
+  https://github.com/zelvior
+
+Maintainer of this repository. The current governance arrangement is described
+in docs/GOVERNANCE.md.
+
+Contributors
+------------
+
+  (none listed yet)
+
+Contributors are added with their agreement, normally once a contribution has
+been merged. Being credited is optional; a contributor may ask to be left out
+or to be listed under a different name.
+
+If you believe you should be listed here and are not, or if an entry is
+inaccurate, please open an issue.
+
+How not to use this file
+------------------------
+
+Do not add names, affiliations, or contact details for other people without
+their permission. Do not add organizations that have not contributed. A person
+appearing in a dependency's copyright notice is not a contributor to AETHER.
+
+Attribution for third-party material belongs in the NOTICE file, not here.

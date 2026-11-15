@@ -1,0 +1,64 @@
+name: Repository checks
+
+# Structural and documentation checks only.
+#
+# This workflow intentionally does NOT build or test any AETHER component:
+# no model, runtime, or 32-bit x86 build/test environment exists yet, and this
+# workflow must not imply otherwise. Build and architecture-compatibility
+# testing will be added only when a real, runnable build exists.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-checks:
+    name: Structure, YAML and Markdown
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+
+      - name: Check standard-library syntax
+        run: python3 -m py_compile .github/scripts/check_repository.py
+
+      - name: Install YAML parser (optional)
+        continue-on-error: true
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Run repository checks
+        run: python3 .github/scripts/check_repository.py
+
+      - name: Validate CITATION.cff metadata
+        continue-on-error: true
+        uses: citation-file-format/cffconvert-github-action@2.0.0
+        with:
+          args: "--validate"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Repository checks"
+            echo ""
+            echo "Structural, YAML and Markdown link checks completed."
+            echo ""
+            echo "No compilation, runtime, or 32-bit x86 compatibility testing is performed"
+            echo "by this workflow. AETHER has no buildable components at this stage."
+          } >> "$GITHUB_STEP_SUMMARY"

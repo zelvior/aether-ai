@@ -218,3 +218,53 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# AETHER-specific additions
+# ---------------------------------------------------------------------------
+# This project states that it distributes no model weights, no datasets, and no
+# secrets. The patterns below keep accidental artefacts out of version control.
+# They are deliberately narrow: they should not hide files that legitimately
+# belong in the repository (e.g. small tokenizer assets added on purpose).
+# See docs/LICENSE_POLICY.md and docs/DATA_POLICY.md.
+
+# Model weights and compiled model artefacts
+*.safetensors
+*.onnx
+*.gguf
+*.pt
+*.pth
+*.aet
+*.ckpt
+checkpoints/
+weights/
+models/
+runs/
+
+# Local datasets — provenance belongs in a manifest, not in git
+datasets/
+dataset/
+data/raw/
+data/processed/
+
+# Local experiment output and logs
+experiments/
+*.log.jsonl
+!docs/**/*.jsonl
+
+# Native build artefacts (for when a runtime exists)
+*.o
+*.a
+OBJ/
+obj/
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+compile_commands.json
+
+# Secrets and local configuration
+secrets.yml
+secrets.yaml
+*.pem
+*.key
+!docs/**/*.key

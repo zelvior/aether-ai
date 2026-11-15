@@ -1,0 +1,24 @@
+# GitHub Sponsors / funding configuration.
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+#
+# No funding account is configured yet. This file is intentionally left with
+# every value commented out rather than pointing at an account that does not
+# exist. GitHub reads this file as-is; false or unverified entries would surface
+# a broken sponsor button.
+#
+# MAINTAINER ACTION REQUIRED: uncomment ONLY the platform below that actually
+# hosts a funding page for the project, and remove the others.
+#
+# github: [username]        # GitHub Sponsors username(s), no @
+# patreon: username         # Patreon username
+# open_collective: name     # Open Collective slug
+# ko_fi: username           # Ko-fi username
+# tidelift: platform-name/package-name
+# community_bridge: project-name
+# liberapay: username
+# issuehunt: username
+# lfx_crowdfunding: project-name
+# polar: username
+# buy_me_a_coffee: username
+# thanks_dev: username
+# custom: ["https://example.com/donate"]
