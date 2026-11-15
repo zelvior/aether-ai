@@ -21,6 +21,7 @@ policy documentation only.
 - [Development philosophy](#development-philosophy)
 - [Planned components](#planned-components)
 - [Project status](#project-status)
+- [Design documents](#design-documents)
 - [Planned development phases](#planned-development-phases)
 - [Contributing](#contributing)
 - [Security](#security)
@@ -120,15 +121,63 @@ What exists today:
 
 - Repository structure, licensing, contribution, governance, and policy documents.
 - A tentative roadmap and research principles.
+- **Phase 2 research and design specifications** (proposals, not results): a literature survey, an
+  architecture specification, a memory budget, a numerical strategy, a model-format specification, a
+  tokenizer specification, and an evaluation plan. See [Design documents](#design-documents).
 
 What does not exist today:
 
 - No model, no trained weights, no tokenizer, no runtime, no model format implementation.
 - No training code and no datasets.
 - No benchmarks, no performance numbers, and no compatibility results.
+- **No part of the proposed design has been implemented or measured.** Every parameter count, memory
+  figure, and compute count in the specifications is derived analytically from a proposal.
 
 If a document in this repository ever appears to describe a completed capability, treat it as a
 documentation bug and report it.
+
+## Design documents
+
+Phase 2 produced **twenty-seven design documents** (listed below, alongside the eight Phase 1
+governance documents). They are **proposals**. They describe what AETHER intends to build and how it
+intends to measure it; they are not descriptions of working software, and no figure in them has been
+measured on AETHER hardware.
+
+| Document | Contents |
+| --- | --- |
+| [`docs/RESEARCH_SURVEY.md`](docs/RESEARCH_SURVEY.md) | Literature review: architectures, CPU/memory constraints, numerics, tokenization, training feasibility |
+| [`docs/ARCHITECTURE_SPEC.md`](docs/ARCHITECTURE_SPEC.md) | Proposed model: layers, dimensions, parameter accounting, compute accounting, alternatives |
+| [`docs/MATHEMATICAL_FOUNDATIONS.md`](docs/MATHEMATICAL_FOUNDATIONS.md) | Forward and backward derivations, activation memory, BPC, initialisation |
+| [`docs/OPTIMISATION_THEORY.md`](docs/OPTIMISATION_THEORY.md) | μP, learning-rate transfer, why the current transfer assumption is biased |
+| [`docs/SCALING_LAW_ANALYSIS.md`](docs/SCALING_LAW_ANALYSIS.md) | What published fits predict at 8.4M parameters, and why to distrust it |
+| [`docs/MEMORY_BUDGET.md`](docs/MEMORY_BUDGET.md) | Storage, runtime, peak inference, and training memory budgets against a 32-bit envelope |
+| [`docs/NUMERICAL_STRATEGY.md`](docs/NUMERICAL_STRATEGY.md) | Numeric types, accumulation, overflow handling, determinism, x87 policy |
+| [`docs/MODEL_FORMAT_SPEC.md`](docs/MODEL_FORMAT_SPEC.md) | Container format: byte layout, validation sequence, malformed-file handling |
+| [`docs/TOKENIZER_SPEC.md`](docs/TOKENIZER_SPEC.md) | Byte-level BPE: vocabulary, specials, encoding/decoding, determinism |
+| [`docs/MULTILINGUAL_RESEARCH.md`](docs/MULTILINGUAL_RESEARCH.md) | Per-script UTF-8 costs, merge-budget allocation, Roman Urdu's unsolved orthography |
+| [`docs/EVALUATION_PLAN.md`](docs/EVALUATION_PLAN.md) | Metrics, baselines, 32-bit vs 64-bit protocol, forbidden comparisons |
+| [`docs/TRAINING_FEASIBILITY.md`](docs/TRAINING_FEASIBILITY.md) | Why 32-bit training is out of scope, what training actually costs, and the pipeline test model |
+| [`docs/INTELLIGENCE_DENSITY_RESEARCH.md`](docs/INTELLIGENCE_DENSITY_RESEARCH.md) | Why no single density metric is proposed, and the measurement matrix instead |
+| [`docs/ADAPTIVE_COMPUTATION.md`](docs/ADAPTIVE_COMPUTATION.md) | Learned halting, MoE and early exit evaluated; an external controller proposed instead |
+| [`docs/TRAINING_STRATEGY.md`](docs/TRAINING_STRATEGY.md) | Initialisation, objectives, data pipeline, checkpointing, reproducibility |
+| [`docs/COGNITIVE_SYSTEM_SPEC.md`](docs/COGNITIVE_SYSTEM_SPEC.md) | Task classification, template planning, verification, termination |
+| [`docs/MEMORY_SYSTEM_SPEC.md`](docs/MEMORY_SYSTEM_SPEC.md) | Persistent memory format, retrieval, conflict handling, deletion |
+| [`docs/TOOLS_SYSTEM_SPEC.md`](docs/TOOLS_SYSTEM_SPEC.md) | Tool registration, default-deny permissions, sandboxing, threat model |
+| [`docs/KNOWLEDGE_SYSTEM_SPEC.md`](docs/KNOWLEDGE_SYSTEM_SPEC.md) | BM25-first retrieval, ingestion, attribution |
+| [`docs/RUNTIME_SPEC.md`](docs/RUNTIME_SPEC.md) | Loading, prefill/decode, kernels, determinism, resource limits |
+| [`docs/ECOSYSTEM_ARCHITECTURE.md`](docs/ECOSYSTEM_ARCHITECTURE.md) | Why six components instead of one model — and when that argument fails |
+| [`docs/CPU_32BIT_RESEARCH.md`](docs/CPU_32BIT_RESEARCH.md) | Address space, x87, SIMD availability, overflow discipline |
+| [`docs/PLATFORM_COMPATIBILITY_PLAN.md`](docs/PLATFORM_COMPATIBILITY_PLAN.md) | The claim ladder: how a compatibility claim is earned, and why none exists yet |
+| [`docs/EXPERIMENTAL_METHODOLOGY.md`](docs/EXPERIMENTAL_METHODOLOGY.md) | Admissibility, run manifests, ablations, statistical honesty |
+| [`docs/EXPERIMENT_PLAN.md`](docs/EXPERIMENT_PLAN.md) | The costed programme that decides whether scale helps — about 5 days of compute |
+| [`docs/RESEARCH_REFERENCES.md`](docs/RESEARCH_REFERENCES.md) | Annotated registry of every cited source, with limitations |
+| [`docs/PHASE2_FINDINGS.md`](docs/PHASE2_FINDINGS.md) | What Phase 2 established, the six errors it corrected, and what it cannot know |
+
+The proposal in one paragraph: an 8 425 728-parameter sliding-window decoder designed for CPU
+execution, with a 1 840 256-parameter variant as the first model to be trained. Analytic peak inference
+memory is about 100 MiB, well inside a conservative 2 GiB 32-bit address-space budget. **This is a
+design statement, not a result.** Whether it can be built and whether it runs on 32-bit x86 are open
+questions that Phase 4 onwards must answer.
 
 ## Planned development phases
 
@@ -138,8 +187,8 @@ in-progress, and planned work.
 
 | Phase | Focus | State |
 | --- | --- | --- |
-| 1 | Repository foundation | In progress |
-| 2 | Research and architecture specification | Planned |
+| 1 | Repository foundation | Completed |
+| 2 | Research and architecture specification | In progress |
 | 3 | Tokenizer development | Planned |
 | 4 | Minimal neural network prototype | Planned |
 | 5 | Training pipeline | Planned |
